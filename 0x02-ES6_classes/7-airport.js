@@ -5,6 +5,6 @@ export default class Airport {
   }
 
   get [Symbol.toStringTag]() {
-    return this;
+    return { _name: this._name, _code: this._code };
   }
 }
