@@ -3,7 +3,7 @@ export default function getStudentsByLocation(obj, city, newGrades) {
     ? obj
       .filter((item) => item.location === city)
       .map((student) => {
-        const grade = newGrades.find((item) => +student.id === +item.studentId).grade
+        const grade = newGrades.find((item) => student.id === item.studentId).grade
             || 'N/A';
         return { ...student, grade };
       })
