@@ -1,5 +1,3 @@
 export default function getStudentIdsSum(obj) {
-  return obj instanceof Array
-    ? obj?.reduce((acc, item) => (acc += +item.id), 0)
-    : 0;
+  return Array.isArray(obj) ? obj.reduce((acc, item) => acc + +item.id, 0) : 0;
 }
