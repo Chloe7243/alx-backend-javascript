@@ -1,15 +1,15 @@
-const fs = require("fs");
+const fs = require('fs');
 
 const countStudents = (path) => {
   try {
-    const data = fs.readFileSync(path, "utf8");
+    const data = fs.readFileSync(path, 'utf8');
     const students = data
-      .split("\n")
+      .split('\n')
       .slice(1)
-      .map((student) => student.replace("\r", ""))
-      .filter((student) => student != "");
+      .map((student) => student.replace('\r', ''))
+      .filter((student) => student !== '');
     const groupedStudents = students.reduce((obj, student) => {
-      const studentDetails = student.split(",");
+      const studentDetails = student.split(',');
       const groupName = studentDetails[3];
       if (!obj[groupName]) obj[groupName] = [];
       obj[groupName].push(studentDetails[0]);
@@ -20,12 +20,12 @@ const countStudents = (path) => {
     Object.entries(groupedStudents).forEach(([key, value]) => {
       console.log(
         `Number of students in ${key}: ${value.length}. List: ${value
-          .join(", ")
-          .replace("/n", "")}`
+          .join(', ')
+          .replace('/n', '')}`
       );
     });
   } catch (err) {
-    throw new Error("Cannot load the database");
+    throw new Error('Cannot load the database');
   }
 };
 
