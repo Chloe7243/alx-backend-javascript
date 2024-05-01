@@ -1,17 +1,19 @@
-export const readDatabase = (file) =>
+import fs from 'fs';
+
+const readDatabase = (file) =>
   new Promise((resolve, reject) => {
-    fs.readFile(file, "utf-8", (err, data) => {
+    fs.readFile(file, 'utf-8', (err, data) => {
       if (err) {
-        reject(new Error("Cannot load the database"));
+        reject(new Error('Cannot load the database'));
       } else {
         const students = data
-          .split("\n")
+          .split('\n')
           .slice(1)
-          .map((student) => student.replace("\r", ""))
-          .filter((student) => student !== "");
+          .map((student) => student.replace('\r', ''))
+          .filter((student) => student !== '');
 
         const groupedStudents = students.reduce((obj, student) => {
-          const studentDetails = student.split(",");
+          const studentDetails = student.split(',');
           const groupName = studentDetails[3];
           if (!groupName) return obj;
           if (!obj[groupName]) obj[groupName] = [];
@@ -22,3 +24,6 @@ export const readDatabase = (file) =>
       }
     });
   });
+
+export default readDatabase;
+module.exports = readDatabase;
