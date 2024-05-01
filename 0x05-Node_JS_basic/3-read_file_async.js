@@ -1,16 +1,16 @@
-const fsPromises = require("fs/promises");
+const fsPromises = require('fs/promises');
 
 const countStudents = async (path) => {
   try {
-    const data = await fsPromises.readFile(path, { encoding: "utf8" });
+    const data = await fsPromises.readFile(path, { encoding: 'utf8' });
     const students = data
-      .split("\n")
+      .split('\n')
       .slice(1)
-      .map((student) => student.replace("\r", ""))
-      .filter((student) => student != "");
+      .map((student) => student.replace('\r', ''))
+      .filter((student) => student !== '');
 
     const groupedStudents = students.reduce((obj, student) => {
-      const studentDetails = student.split(",");
+      const studentDetails = student.split(',');
       const groupName = studentDetails[3];
       if (!groupName) return obj;
       if (!obj[groupName]) obj[groupName] = [];
@@ -22,8 +22,8 @@ const countStudents = async (path) => {
     Object.entries(groupedStudents).forEach(([key, value]) => {
       console.log(
         `Number of students in ${key}: ${value.length}. List: ${value
-          .join(", ")
-          .replace("/n", "")}`
+          .join(', ')
+          .replace('/n', '')}`
       );
     });
   } catch (err) {
