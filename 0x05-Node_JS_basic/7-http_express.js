@@ -15,7 +15,7 @@ app.get('/students', (_, res) => {
     new Promise((resolve, reject) => {
       fs.readFile(path, 'utf-8', (err, data) => {
         if (err) {
-          reject(new Error('Cannot load the database'));
+          responseParts.push('Cannot load the database');
         } else {
           const students = data
             .split('\n')
@@ -40,14 +40,14 @@ app.get('/students', (_, res) => {
                 .replace('/n', '')}`
             );
           });
-          const responseText = responseParts.join('\n');
 
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'text/plain');
-          res.setHeader('Content-Length', responseText.length);
-          res.write(Buffer.from(responseText));
           resolve(true);
         }
+        const responseText = responseParts.join('\n');
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Length', responseText.length);
+        res.write(Buffer.from(responseText));
       });
     }))();
 });
