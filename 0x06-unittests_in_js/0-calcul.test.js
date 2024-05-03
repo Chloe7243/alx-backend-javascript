@@ -6,8 +6,8 @@ describe('calculateNumber', () => {
   it('should return 4', () => {
     assert.strictEqual(calculateNumber(1, 3), 4);
   });
-  it('should return 5', () => {
-    assert.strictEqual(calculateNumber(1.2, 3), 2);
+  it('should return 4', () => {
+    assert.strictEqual(calculateNumber(1.2, 3), 4);
   });
   it('should return 5', () => {
     assert.strictEqual(calculateNumber(1, 3.7), 5);
